@@ -1,0 +1,35 @@
+name: deeplink_cookbook
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=2.19.5 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  go_router: ^6.5.8
+  google_fonts: ^4.0.3
+  intl: any
+  velocity_x: ^3.6.0
+  flutter_hooks: ^0.18.0
+  hooks_riverpod: ^2.3.6
+  get: ^4.6.5
+  flutter_svg: ^2.0.5
+  animations: ^2.0.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
