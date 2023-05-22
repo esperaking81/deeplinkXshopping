@@ -1,5 +1,5 @@
+import 'package:deeplink_cookbook/features/orders/presentation/order_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -63,7 +63,12 @@ class Footer extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              context.go('/order');
+              showBottomSheet(
+                context: context,
+                builder: (_) => MaterialPageRoute(
+                  builder: (_) => const OrderScreen(),
+                ),
+              );
             },
             child: const Text('Checkout'),
           ).expand(),

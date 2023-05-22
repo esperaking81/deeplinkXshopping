@@ -12,7 +12,6 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.colors.primary,
       body: SafeArea(
         child: Column(
           children: [

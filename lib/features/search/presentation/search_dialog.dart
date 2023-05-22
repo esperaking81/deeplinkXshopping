@@ -11,6 +11,7 @@ class SearchDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     var i18n = AppLocalizations.of(context)!;
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: SizedBox(
           height: context.mq.size.height,

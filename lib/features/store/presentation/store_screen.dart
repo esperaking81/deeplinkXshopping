@@ -1,4 +1,6 @@
+import 'package:deeplink_cookbook/features/cart/presentation/cart_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -17,37 +19,39 @@ class StoreScreen extends StatelessWidget {
       drawer: const Drawer(
         child: StoreDrawerContent(),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(AppDimensions.defaultSize - 6),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.white, Colors.grey.shade200],
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const _MyAppBar(),
-            Padding(
-              padding: const EdgeInsets.all(AppDimensions.defaultSize - 6),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  WelcomeText(),
-                  SizedBox(
-                    height: AppDimensions.defaultSize,
-                  ),
-                  SearchBar(),
-                  SizedBox(
-                    height: AppDimensions.defaultSize,
-                  ),
-                  StoreSection(),
-                ],
-              ),
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.all(AppDimensions.defaultSize - 6),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.white, Colors.grey.shade200],
             ),
-          ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const _MyAppBar(),
+              Padding(
+                padding: const EdgeInsets.all(AppDimensions.defaultSize - 6),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    WelcomeText(),
+                    SizedBox(
+                      height: AppDimensions.defaultSize,
+                    ),
+                    SearchBar(),
+                    SizedBox(
+                      height: AppDimensions.defaultSize,
+                    ),
+                    StoreSection(),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -96,7 +100,12 @@ class _MyAppBar extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            context.go('/cart');
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const CartScreen(),
+                fullscreenDialog: true,
+              ),
+            );
           },
           icon: const Icon(Icons.shopping_cart),
         ),
@@ -155,34 +164,36 @@ class StoreDrawerContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var i18n = AppLocalizations.of(context)!;
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              IconButton(
-                onPressed: () {
-                  Scaffold.of(context).closeDrawer();
-                },
-                icon: const Icon(Icons.close),
-              ),
-            ],
-          ),
-          CategoryItem(
-            title: i18n.fashion,
-            icon: Icons.grid_view_rounded,
-          ),
-          CategoryItem(
-            title: i18n.computing,
-            icon: Icons.computer_rounded,
-          ),
-          CategoryItem(
-            title: i18n.phones,
-            icon: Icons.phone_rounded,
-          ),
-        ],
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Scaffold.of(context).closeDrawer();
+                  },
+                  icon: const Icon(Icons.close),
+                ),
+              ],
+            ),
+            CategoryItem(
+              title: i18n.fashion,
+              icon: Icons.grid_view_rounded,
+            ),
+            CategoryItem(
+              title: i18n.computing,
+              icon: Icons.computer_rounded,
+            ),
+            CategoryItem(
+              title: i18n.phones,
+              icon: Icons.phone_rounded,
+            ),
+          ],
+        ),
       ),
     );
   }

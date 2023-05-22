@@ -20,7 +20,7 @@ class _StartupScreenState extends State<StartupScreen> {
       const Duration(seconds: 2),
       () {
         if (mounted) {
-          context.go('/welcome');
+          context.go('/');
         }
       },
     );

@@ -30,12 +30,23 @@ class WelcomeScreen extends HookWidget {
             color: context.colors.primary,
             height: size.height * .55,
             width: size.width,
-            child: const Align(
-              alignment: Alignment.center,
-              child: Icon(
-                Icons.shopify,
-                size: 176,
-              ),
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.shopify,
+                  size: 176,
+                  color: Colors.white,
+                ),
+                const SizedBox(height: AppDimensions.defaultSize),
+                Text(
+                  AppStrings.appName,
+                  style: context.headlineLarge?.copyWith(color: Colors.white),
+                ),
+              ],
             ),
           ),
           Expanded(
@@ -68,31 +79,31 @@ class _StepTwoView extends HookConsumerWidget {
       children: [
         Text(i18n.promptYourName).text.semiBold.xl2.make(),
         const SizedBox(height: AppDimensions.defaultSize),
-        TextField(
-          controller: nameController,
-          decoration: InputDecoration(
-            hintText: AppStrings.sampleName,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(32),
+        Row(
+          children: [
+            TextField(
+              controller: nameController,
+              decoration: InputDecoration(
+                hintText: AppStrings.sampleName,
+              ),
+            ).expand(),
+            const SizedBox(width: AppDimensions.mediumSize),
+            SizedBox(
+              height: AppDimensions.defaultSize * 3,
+              child: FilledButton(
+                onPressed: () {
+                  if (nameController.text.isEmpty) {
+                    return;
+                  }
+
+                  ref.read(nameProvider.notifier).state = nameController.text;
+
+                  context.go('/search');
+                },
+                child: const Icon(Icons.arrow_forward),
+              ),
             ),
-          ),
-        ),
-        const SizedBox(height: AppDimensions.mediumSize),
-        SizedBox(
-          height: AppDimensions.defaultSize * 3,
-          width: double.infinity,
-          child: FilledButton(
-            onPressed: () {
-              if (nameController.text.isEmpty) {
-                return;
-              }
-
-              ref.read(nameProvider.notifier).state = nameController.text;
-
-              context.go('/search');
-            },
-            child: Text(i18n.proceed),
-          ),
+          ],
         ),
       ],
     );

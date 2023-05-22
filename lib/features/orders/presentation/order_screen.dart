@@ -1,59 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../../../core/constants/app_dimensions.dart';
 
 class OrderScreen extends HookWidget {
   const OrderScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var i18n = AppLocalizations.of(context)!;
     var addressController = useTextEditingController();
     var numberController = useTextEditingController();
 
     return Scaffold(
-      body: Column(
-        children: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.close,
+      body: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            IconButton(
+              onPressed: () {
+                context.pop();
+              },
+              icon: const Icon(
+                Icons.close,
+              ),
             ),
-          ),
-          const SizedBox(height: AppDimensions.defaultSize),
-          Container(
-            height: context.height * .5,
-            width: context.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppDimensions.mediumSize),
-            ),
-            padding: const EdgeInsets.all(AppDimensions.defaultSize),
-            child: Column(
-              children: [
-                FilledTextField(
-                  controller: addressController,
-                  hintText: '10th Avenue, Lekki State, Lagos',
-                  label: 'Delivery address',
-                ),
-                const SizedBox(
-                  height: AppDimensions.mediumSize,
-                ),
-                FilledTextField(
-                  controller: numberController,
-                  hintText: '0901238293838',
-                  label: 'Number we can call',
-                ),
-                const SizedBox(
-                  height: AppDimensions.mediumSize,
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Confirm Order'),
-                ),
-              ],
-            ),
-          ).expand(),
-        ],
+            const SizedBox(height: AppDimensions.defaultSize),
+            Container(
+              height: context.height * .5,
+              width: context.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppDimensions.mediumSize),
+              ),
+              padding: const EdgeInsets.all(AppDimensions.defaultSize),
+              child: Column(
+                children: [
+                  FilledTextField(
+                    controller: addressController,
+                    hintText: '10th Avenue, Lekki State, Lagos',
+                    label: i18n.deliveryAddress,
+                  ),
+                  const SizedBox(
+                    height: AppDimensions.mediumSize,
+                  ),
+                  FilledTextField(
+                    controller: numberController,
+                    hintText: '0901238293838',
+                    label: i18n.numbersWeCanCall,
+                  ),
+                  const SizedBox(
+                    height: AppDimensions.mediumSize,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('Confirm Order'),
+                  ),
+                ],
+              ),
+            ).expand(),
+          ],
+        ),
       ),
     );
   }
